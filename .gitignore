@@ -1,0 +1,12 @@
+/node_modules
+/.cache
+/.vscode
+/.temp
+/.dist
+/dist
+/.DS_Store
+/coverage
+/.nyc_output
+/npm-debug.log
+/.idea
+/package-lock.json
