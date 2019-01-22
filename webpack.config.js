@@ -1,6 +1,7 @@
-const webpack= require("webpack");
+const webpack = require("webpack");
 const CopyWebpackPlugin=require('copy-webpack-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     entry: "./src/app.tsx",
     output: {
@@ -26,11 +27,33 @@ module.exports = {
             { 
                 enforce: "pre",
                  test: /\.js$/, 
-                 loader: "source-map-loader",
-                 options: {
-                    name:'resource/[name].[ext]'
-                } 
-            }
+                 loader: "source-map-loader"
+            },
+            {//css文件处理
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+                })
+              },
+              {//sass文件处理
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: ['css-loader','sass-loader']
+                })
+              },
+              {//图片资源的加载
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                        name:'resource/[name].[ext]'
+                    },
+                  },
+                ],
+              }
         ]
     },
     plugins:[
@@ -42,6 +65,7 @@ module.exports = {
         new htmlWebpackPlugin({
             template:'./src/index.html'
         }),
+        new ExtractTextPlugin("css/[name].css"),
     ],
 
     // When importing a module whose path matches one of the following, just
