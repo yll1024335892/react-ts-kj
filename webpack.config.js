@@ -1,7 +1,11 @@
+const webpack= require("webpack");
+const CopyWebpackPlugin=require('copy-webpack-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: "./src/app.tsx",
     output: {
         filename: "bundle.js",
+        publicPath:'/dist/',
         path: __dirname + "/dist"
     },
 
@@ -19,9 +23,26 @@ module.exports = {
             { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { 
+                enforce: "pre",
+                 test: /\.js$/, 
+                 loader: "source-map-loader",
+                 options: {
+                    name:'resource/[name].[ext]'
+                } 
+            }
         ]
     },
+    plugins:[
+        new CopyWebpackPlugin([
+            {from:'./src/fonts',to:'./fonts'},
+            {from:'./src/js',to:'./js'},
+            {from:'./src/resource',to:'./resource'}
+        ]),
+        new htmlWebpackPlugin({
+            template:'./src/index.html'
+        }),
+    ],
 
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
