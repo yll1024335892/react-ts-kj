@@ -11,9 +11,11 @@ proj/
 ```
 npm init
 ```
-##	安装webpack的依赖
+##	安装webpack的依赖,安装webpack时实编译
 ```
 npm install webpack -g
+npm install webpack-cli -g  //webpack的操作指令 webpack去手动编译生文件
+npm install webpack-dev-server //webpack-dev-server去进行实时的编译文件但不生成文件
 ```
 ##	添加React和React-Dom到package.json文件中作为依赖
 ```
@@ -38,3 +40,4 @@ npm install --save-dev copy-webpack-plugin
 ```
 npm install --save-dev html-webpack-plugin
 ```
+压缩的指令:到package.json所在的目录中webpack进行编译并生成文件,webpack-dev-server运行进行实时动态的编译操作
