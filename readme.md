@@ -41,3 +41,16 @@ npm install --save-dev copy-webpack-plugin
 npm install --save-dev html-webpack-plugin
 ```
 压缩的指令:到package.json所在的目录中webpack进行编译并生成文件,webpack-dev-server运行进行实时动态的编译操作
+
+##	对一些资源文件的处理extract-text-webpack-plugin需要携带@next下载4.0.0以上兼任webpack4.0.0以上的版本
+```
+npm install --save-dev extract-text-webpack-plugin@next
+```
+安装css,scss和图片文件的解析的module
+```
+npm install --save-dev style-loader
+npm install --save-dev css-loader
+npm install --save-dev sass-loader
+npm install --save-dev file-loader
+```
+
